@@ -1,0 +1,8 @@
+bootstrap4==0.1.0
+Django==2.2.19
+django-extensions==3.1.1
+ipython==7.22.0
+pip==21.0.1
+pytz==2021.1
+sqlparse==0.4.1
+wheel==0.36.2
