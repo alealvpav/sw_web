@@ -14,9 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns, static
 from django.urls import path, include
+
+from sw_web.settings import MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("sw_main_web.urls")),
+    path("sw-movies/", include("sw_movies.urls")),
 ]
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -39,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_extensions",
     "bootstrap4",
+    "sw_main_web",
+    "sw_movies",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+MIDDLEWARE += ("sw_main_web.middlewares.MoviesDataMiddleware",)
 
 ROOT_URLCONF = "sw_web.urls"
 
@@ -122,3 +124,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+# Media config
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(__file__), "static").replace("\\", "/"),
+)
