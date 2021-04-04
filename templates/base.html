@@ -1,0 +1,76 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% block import_bootstrap %}
+        {% load bootstrap4 %}
+
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+    {% endblock %}
+
+    {% block extra_head %}{% endblock %}
+
+</head>
+<body>
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{% url "home" %}">SW movies</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-sw-movies"
+                aria-controls="navbar-sw-movies" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-sw-movies">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url "home" %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-movies" data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">Movies</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-movies">
+                        {# TODO: receive Film queryset from view to build the links to them in the dropdown menu #}
+                        {% for film in films %}
+{#                            <a class="dropdown-item" href={% url "movie" film.pk %}>{{ film.name }}</a>#}
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-characters" data-toggle="dropdown"
+                       aria-haspopup="true"
+                       aria-expanded="false">Characters</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-characters">
+                        {# TODO: receive Character queryset from view to build the links to them in the dropdown menu #}
+                        {% for character in characters %}
+{#                            <a class="dropdown-item" href={% url "movie" character.pk %}>{{ character.name }}</a>#}
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+            {# TODO: Build the search view and search form #}
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="{% trans "Search" %}" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
+            </form>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+</body>
+<footer class="container">
+    <p>&copy; 2020</p>
+    {% block extra_footer %}{% endblock %}
+</footer>
+</html>
