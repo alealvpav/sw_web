@@ -55,22 +55,57 @@
                     </div>
                 </li>
             </ul>
-            {# TODO: Build the search view and search form #}
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="{% trans "Search" %}" aria-label="Search">
+            <form class="form-inline my-2 my-lg-0" action="{% url "search" %}" method="POST">
+                {% csrf_token %}
+{#                {{ request.search_form.title }}#}
+                <input class="form-control mr-sm-2" name="title" type="text" placeholder="{% trans "Search" %}" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{% trans "Search" %}</button>
             </form>
         </div>
     </nav>
+    <hr>
 {% endblock %}
 
-{% block content %}{% endblock %}
+{% block jumbotron %}
+        <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">{% block h1 %}{% endblock %}</h1>
+            <p>
+                {% block sub_h1_p %}{% endblock %}
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+<main role="main">
+
+    {% block content %}{% endblock %}
+
+</main>
 
 <hr>
 
+{% block navigation_history %}
+    {% if request.session.history %}
+        <div class="container">
+            <h3>Navigation history</h3>
+            <ul>
+                {% for url in request.session.history %}
+                    <li><a href="{{ url }}">Previous link {{ forloop.counter }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <hr>
+
+{% endblock %}
+
 </body>
+
 <footer class="container">
-    <p>&copy; 2020</p>
+    <p>&copy; 2021</p>
     {% block extra_footer %}{% endblock %}
 </footer>
+
 </html>

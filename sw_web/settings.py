@@ -51,7 +51,11 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-MIDDLEWARE += ("sw_main_web.middlewares.MoviesDataMiddleware",)
+MIDDLEWARE += (
+    "sw_main_web.middlewares.MoviesDataMiddleware",
+    "sw_main_web.middlewares.SearchFormMiddleware",
+    "sw_main_web.middlewares.PagesHistoryMiddleware",
+)
 
 ROOT_URLCONF = "sw_web.urls"
 

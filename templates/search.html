@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %} {% trans "Search" %} {% endblock %}
+
+{% block h1 %}{% trans "Search result" %}{% endblock %}
+{% block sub_h1_p %}Search text: {{ search_text }}{% endblock %}
+
+{% block content %}
+
+        <div class="container" id="search-results">
+            {% if movies %}
+                <h2>{% trans "Movies found:" %}</h2>
+                <ul>
+                    {% for movie in movies %}
+                        <li><a href="{% url "movie" movie.pk %}">{{ movie.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h2>{% trans "Sorry" %}</h2>
+                <p>{% trans "There are no films related with your search" %}</p>
+            {% endif %}
+
+        </div>
+
+{% endblock %}

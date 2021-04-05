@@ -3,12 +3,14 @@
 
 {% block title %}{% trans "Episode " %}{{ movie.episode_id }} - {{ movie.title }}{% endblock %}
 
+{% block h1 %}{{ movie.title }}{% endblock %}
+
 {% block content %}
-    <div class="container carouselContainer">
+    <div class="container carouselContainer" style="width: 30%;height: 30%">
         <div id="carousel-sw-movie" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-sw-movie" data-slide-to="0" class="active"></li>
-            </ol>
+{#            <ol class="carousel-indicators">#}
+{#                <li data-target="#carousel-sw-movie" data-slide-to="0" class="active"></li>#}
+{#            </ol>#}
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="d-block w-100"
@@ -25,9 +27,11 @@
         <h2>Characters in the movie:</h2>
         <ul>
             {% for character in movie_characters %}
-                <a href="{% url "character" character.pk %}">
-                    <li>{{ character.name }}</li>
-                </a>
+                <li>
+                    <a href="{% url "character" character.pk %}">
+                        {{ character.name }}
+                    </a>
+                </li>
             {% endfor %}
         </ul>
     </div>

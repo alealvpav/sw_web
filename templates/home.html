@@ -5,20 +5,12 @@
 
 {% block navbar %}{{ block.super }}{% endblock %}
 
+{% block h1 %}{% trans "Star Wars movies" %}{% endblock %}
+{% block sub_h1_p %}{% blocktrans %}This is a website with information about Star Wars movies and characters{% endblocktrans %}{% endblock %}
+
 {% block content %}
 
-    <main role="main">
-
-        <div class="jumbotron">
-            <div class="container">
-                <h1 class="display-3">{% block h1 %}{% trans "Star Wars movies" %}{% endblock %}</h1>
-                <p>
-                    {% blocktrans %}This is a website with information about Star Wars movies and characters{% endblocktrans %}
-                </p>
-            </div>
-        </div>
-
-        <div class="container carouselContainer">
+        <div class="container carouselContainer" style="width: 30%;height: 30%">
             <div id="carousel-sw-movies" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     {% for film in request.films %}
@@ -45,9 +37,5 @@
                 </a>
             </div>
         </div>
-
-    </main>
-
-    {% block navigation_history %}{% endblock %}
 
 {% endblock %}
